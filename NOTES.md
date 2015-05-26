@@ -7,9 +7,16 @@ Intermediate and up frontend-devs.
 Core Points
 -----------
 
-Set up a landscape/context for CSS architecture in bigger apps (not content-driven websites). Make concrete recommendations, plus linter link.
+Set up a landscape/context: bigger apps (not content-driven websites).
 
-Important that for less experienced folk it is not about deep structure behind it, just componentization 101, and just enumerate conclusion.
+Break out of framework-of-the-day inertia, and look at componentization/modularization basics. Then port that back to world of DOM/CSS. Start with the runtime model and then see what feeds into that.
+
+Specific intersections of topics:
+
+- routes (UI state orthogonal to components on page)
+- runtime DOM vs HTML-as-authoring-syntax
+- inline styles are not evil
+- virtual DOM
 
 Context/Setting
 ---------------
