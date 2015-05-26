@@ -17,7 +17,7 @@ Reset
 
 Let's pretend we completed a computer science degree 15 years ago and then spent the rest of the time until now working on a farm under a rock on the moon... in Jupiter's orbit.
 
-We have now returned to the lucrative world of web-app development, and have joined a "shop" - either a product startup or a consulting firm or freelancing or working a department in a large bank. We are doing "front-end development," according to HR. What is our perspective on the next project assignment we get?
+We have now returned to the lucrative world of web-app development, and have joined a "shop" - either a product startup or a consulting firm or freelancing or working a department in a large bank. We are doing "front-end development," according to our job posting. So what is our perspective on the next project assignment we get?
 
 We are still building software, yes. We might have a "front end" title, but we are still contributing to a cohesive software project overall. And as a whole, it is expected to meet some requirements, as software usually would. In this case that usually includes:
 
@@ -43,15 +43,23 @@ For our application-writing purposes, a Web browser is two things:
 - JavaScript VM
 - a bunch of useful programmable APIs
 
-> Wow, wow, what about semantic web and markup and search engine bots? Well, those are content website terms. Modern web-apps are not websites: they are behind a login-wall, dealing with highly personal and private data, optimized for specific device presentation. Not to say that search engines can't be helped - a well-architected web-app is easy to render in a crawler-friendly way.
-
 Useful APIs found in the average browser:
 
-- DOM, a hierarchical data structure
-- layout and rendering engine: configured via CSS, renders DOM
+- layout and rendering engine (that uses DOM and CSS as inputs)
+- input event stream (keyboard, mouse, other events)
+- networking library (`XMLHttpRequest`, WebSockets)
+- media upload API
 - canvas 2D, WebGL draw calls
 - WebAudio
-- soon to be the rest of the operating system, amirite?
+- soon to be the rest of the operating system, amirite? heh, nevermind...
+
+This view of the browser might seem weird. It's different from the popular "let's write some dynamic HTML" approach to the web.
+
+But we are just programmers at the outset. Our reference point is basic computer science and software engineering. It feels more natural to reason in terms of pure vanilla code, not context-specific hacks. Same as why we use high-level languages to program instead of low-level machine code.
+
+In that sense we *render* to DOM and CSS, as a specific presentation concern. And consume DOM keyboard and mouse events as input concern.
+
+Finally, what about semantic web markup and search engine crawler bots? Modern web-apps are not websites: they are behind a login-wall, dealing with highly personal and private data and optimized for specific device presentation. Even then, a well-architected web-app is easy to render in a crawler-friendly way using isomorphic code techniques. So we are not painting ourselves into a corner in any case.
 
 Basic Building Blocks
 ---------------------
