@@ -25,7 +25,52 @@ You are building a web app. You are part of a team. There is backend, database, 
 
 Apps, unlike websites, can have very fast and deep churn in the frontend code. New features are added constantly, usage patterns are discovered/deprecated, and interaction is a lot more complex, plus bug severity threshold is more sensitive. Add in IE8 support (for some of us!) and constant browser compatibility regressions.
 
-How do we keep the app working, maintain development speed and (hopefully) stay sane? Can't do without good testing, of course. But we can also dramatically improve things by paying deeper attention to CSS and DOM architecture.
+Back in the day, we had server-side HTML generation. Some sprinkling of CSS on top. Then we started using AJAX and moving more logic into browser-land. At first just JS and raw DOM calls. Then module loading, minification, CSS precompilation, automatic redraw via Angular digest or React observable state, BEM, etc. The backend turned into a REST service, cutting out view rendering but prompting PATCH vs PUT discussions. We now argue about Grunt vs Gulp vs Webpack vs Brunch, web components, CSS variables, etc.
+
+There has got to be a roadmap to all of this, a quick compass reading to help make architecture design decisions a little less inertia- and politics-driven, and more grounded in common objective goals that we all share as teammates.
+
+So let's go back to basics and reconnect with what we are trying to do in the first place.
+
+Reset
+-----
+
+Let's pretend we completed a computer science degree 15 years ago and then spent the rest of the time until now working on a farm under a rock on the moon... in Jupiter's orbit.
+
+We have now returned, and have joined a "web shop" - either a product startup or a consulting firm or freelancing or working a department in a large bank. We are doing "front end" work. What is our perspective on the next project assignment we get?
+
+We are still building software, yes. We might have a "front end" title, but we are still contributing to a cohesive software project overall. And as a whole, it is expected to meet some requirements, as software usually would. In this case that usually includes:
+
+- present an interactive user interface on user devices
+- effect changes in server state (i.e. database)
+- report server state back to the user interface
+
+Ongoing checkmarks to hit are: don't corrupt data, don't allow for a security breach, support devices (browsers) that users actually have, keep things accessible for everyone, and more (in agile-land referred to as definition-of-done).
+
+We have a notion of what is our "production" target environment. It's a survey of all the computing resources that our software is going to be running on. Let's fast forward into a hypothetical moment in time where the project is live, and a user is interacting with it. What are we dealing with?
+
+Runtime Environment
+-------------------
+
+We usually have a server to execute trusted business logic. Also referred to as a "backend". Typically a process running on a Linux or Windows box somewhere in a cloud datacenter. The process is a language VM: NodeJS instance, a PHP interpreter plugin for Apache, a Rails or Java VM, etc. There is a database connected, third-party service APIs, a load-balancer proxy to channel requests, yadda, yadda.
+
+And then we have the user's browser.
+
+Since we have been hanging out under a rock for the last 15 years, we have a radically different - naïve - perspective on this ubiquitous piece of software that everyone else takes for granted.
+
+For our application-writing purposes, a Web browser is two things:
+
+- JavaScript VM
+- a bunch of useful programmable APIs
+
+> Wow, wow, what about semantic web and markup and search engine bots? Well, those are content website terms. Modern web-apps are not websites: they are behind a login-wall, dealing with highly personal and private data, optimized for specific device presentation. Not to say that search engines can't be helped - a well-architected web-app is easy to render in a crawler-friendly way.
+
+Useful APIs found in the average browser:
+
+- DOM, a hierarchical data structure
+- layout and rendering engine: configured via CSS, renders DOM
+- canvas 2D, WebGL draw calls
+- WebAudio
+- soon to be the rest of the operating system, amirite?
 
 Basic Building Blocks
 ---------------------
