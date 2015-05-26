@@ -1,23 +1,23 @@
 
-Context/Setting
----------------
+Preface
+-------
 
-You are building a web app. You are part of a team. There is backend, database, frontend framework like Angular/Backbone/Ember or maybe server-side templates like Slim/ERB/Twig. Maybe you still call it a website, maybe it integrates with one, but the moment you are talking CI, builds, components, databases, that's an app.
+You are building a web app. You are part of a team. There is backend, database, front-end framework like Angular/Backbone/Ember or maybe server-side templates like Slim/ERB/Twig. Maybe you still call it a website, maybe it integrates with one, but the moment you are talking CI, builds, components, databases, that's an app.
 
-Apps, unlike websites, can have very fast and deep churn in the frontend code. New features are added constantly, usage patterns are discovered/deprecated, and interaction is a lot more complex, plus bug severity threshold is more sensitive. Add in IE8 support (for some of us!) and constant browser compatibility regressions.
+Apps, unlike websites, can have very fast and deep churn in the front-end code. New features are added constantly, usage patterns are discovered/deprecated, and interaction is a lot more complex, plus bug severity threshold is more sensitive. Add in IE8 support (for some of us!) and constant browser compatibility regressions.
 
-Back in the day, we had server-side HTML generation. Some sprinkling of CSS on top. Then we started using AJAX and moving more logic into browser-land. At first just JS and raw DOM calls. Then module loading, minification, CSS precompilation, automatic redraw via Angular digest or React observable state, BEM, etc. The backend turned into a REST service, cutting out view rendering but prompting PATCH vs PUT discussions. We now argue about Grunt vs Gulp vs Webpack vs Brunch, web components, CSS variables, etc.
+To help that, we have a few libraries and frameworks to manage front-end codebase complexity. Not "a few", actually - a huge rat's nest of opinions, each with a dedicated camp of followers and steep learning curve. Not to mention completely incompatible calling conventions in each, so we can't even reuse code written for one framework in another.
 
 There has got to be a roadmap to all of this, a quick compass reading to help make architecture design decisions a little less inertia- and politics-driven, and more grounded in common objective goals that we all share as teammates.
 
-So let's go back to basics and reconnect with what we are trying to do in the first place.
+We know about good foundational software engineering rules. Don't Repeat Yourself. Keep things modular and component-driven. Separate concerns, such as business logic and presentation. So let's go back to basics and "reinvent the wheel" a little bit, to have a view of modern UI patterns that is grounded in those timeless principles.
 
 Reset
 -----
 
 Let's pretend we completed a computer science degree 15 years ago and then spent the rest of the time until now working on a farm under a rock on the moon... in Jupiter's orbit.
 
-We have now returned, and have joined a "web shop" - either a product startup or a consulting firm or freelancing or working a department in a large bank. We are doing "front end" work. What is our perspective on the next project assignment we get?
+We have now returned to the lucrative world of web-app development, and have joined a "shop" - either a product startup or a consulting firm or freelancing or working a department in a large bank. We are doing "front-end development," according to HR. What is our perspective on the next project assignment we get?
 
 We are still building software, yes. We might have a "front end" title, but we are still contributing to a cohesive software project overall. And as a whole, it is expected to meet some requirements, as software usually would. In this case that usually includes:
 
