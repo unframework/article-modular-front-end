@@ -51,3 +51,11 @@ It's... rustic? But it works and is universally recognized. The underscore prefi
 Class inheritance is something we just won't even touch - it is the author's belief that JS explicitly forces a preference for composition over inheritance, so we will get by with that just fine.
 
 Of course, many production frameworks won't have us doing things this way. There are good reasons sometimes, although not always. But one way or another we can always *map the OOP concept* onto the framework-specific building blocks. This is still our lingua franca for understanding the underlying strategies of framework writers.
+
+## File Structure
+
+Let's start by mapping out the `javascripts`, `styles`, `images` directories... **kidding**!
+
+Honestly, whatever works. It is worth mentioning that there *is* a strong argument for keeping files organized by topic (e.g. `users`, `payments`, `socialSettings`), not by type of file (e.g. `scripts`, `styles`, `templates`). Any modern front-end codebase will pass through a build pipeline, and most contributors will have some cross-functional ability, so there should be more than enough freedom to lay out the files according to developer convenience, not specific deployment format.
+
+But again, whatever gets us to building the app.
