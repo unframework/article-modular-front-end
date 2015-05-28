@@ -50,7 +50,7 @@ It's... rustic? But it works and is universally recognized. The underscore prefi
 
 Class inheritance is something we just won't even touch - it is the author's belief that JS explicitly forces a preference for composition over inheritance, so we will get by with that just fine.
 
-Of course, many production frameworks won't have us doing things this way. There are good reasons sometimes, although not always. But one way or another we can always *map the OOP concept* onto the framework-specific building blocks. This is still our lingua franca for understanding the underlying strategies of framework writers.
+Of course, many production frameworks won't have us defining components this way. There are good reasons sometimes, although not always. But one way or another we can always *map the OOP concept* onto the framework-specific building blocks. This is still our lingua franca for understanding the underlying strategies of framework writers.
 
 ## File Structure
 
