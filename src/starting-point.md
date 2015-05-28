@@ -1,6 +1,10 @@
 # Starting Point
 
-It's a miracle: we just woke up from a 15-year coma that started in 2000 and deprived us from the fun of watching modern web frameworks duke it out in Internet comment threads over the years. Now, we want to get back to doing what we love - building software that does useful things, on the Web. We still remember the computer science basics, and have quickly brushed up on modern web technologies available in a typical browser.
+It's a miracle: we just woke up from a 15-year coma that started in 2000 and deprived us from the fun of watching modern web frameworks duke it out in Internet comment threads over the years.
+
+Now, we want to get back to doing what we love - building software that does useful things, on the Web.
+
+We still remember the computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser.
 
 ## Runtime Environment
 
@@ -27,7 +31,7 @@ This is a very programmer-centric view, but hey - we are programmers.
 
 Nice, readable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious. Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world.
 
-And at the core of the object-oriented JavaScript is, of course, the object. We will stick to the basic idioms of object definition and creation, such as this:
+And at the core of the object-oriented JavaScript is, of course, the object. In our examples and sketches we will stick to the basic idioms of object definition and creation, such as this:
 
 ```js
 function MyObjectType() {
@@ -42,6 +46,8 @@ MyObjectType.prototype.applySomeBehaviour = function () {
 var obj = new MyObjectType();
 ```
 
-It's... rustic? But it works and is universally recognized. The underscore prefix notation for private members is grating to some, but again in many circles it has been accepted as a signal of intent, so we'll stick with it.
+It's... rustic? But it works and is universally recognized. The underscore prefix notation for private members is grating to some programmers, but again in many circles it has been accepted as a signal of intent, so we'll stick with it.
 
-Class inheritance is something we just won't even touch - it is my belief that JS explicitly forces a preference for composition over inheritance, so we will get by with that just fine.
+Class inheritance is something we just won't even touch - it is the author's belief that JS explicitly forces a preference for composition over inheritance, so we will get by with that just fine.
+
+Of course, many production frameworks won't have us doing things this way. There are good reasons sometimes, although not always. But one way or another we can always *map the OOP concept* onto the framework-specific building blocks. This is still our lingua franca for understanding the underlying strategies of framework writers.
