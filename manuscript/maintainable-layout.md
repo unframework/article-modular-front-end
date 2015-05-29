@@ -23,4 +23,8 @@ As usual - **kidding**! HTML is not a programming language!
 
 ## Layout Contract
 
-A well-designed code component will have a solid stable contract.
+Let's consider sidebar, top bar and main content to be a separate visual component each. Each has an expectation to render as a simple rectangular block. Top bar and sidebar are typically "sticky" on screen, or at least are absolutely positioned along the sides, and the main content has to avoid appearing "under" those two areas.
+
+We could implement that positioning logic in the components, but that would force them to be "aware" of not just the containing window dimensions, but also each other - to respect each others' size while seamlessly rendering adjoining content.
+
+Alternatively, we can reduce the contract footprint of those components by introducing a page layout component.

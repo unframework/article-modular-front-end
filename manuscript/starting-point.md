@@ -29,9 +29,9 @@ This is a very programmer-centric view, but hey - we are programmers.
 
 ## Building Blocks
 
-Nice, readable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious. Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world.
+Nice, readable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious.
 
-And at the core of the object-oriented JavaScript is, of course, the object. In our examples and sketches we will stick to the basic idioms of object definition and creation, such as this:
+Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world. And at the core of the object-oriented JavaScript is, of course, the object. In our examples and sketches we will stick to the basic idioms of object definition and creation, such as this:
 
 ```js
 function MyObjectType() {
