@@ -4,11 +4,11 @@ It's a miracle: we just woke up from a 15-year coma that started in 2000 and dep
 
 Now, we want to get back to doing what we love - building software that does useful things, on the Web.
 
-We still remember the computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser.
+We still remember the computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser. We know JavaScript (and some other languages, because we are hip like that).
+
+So what are we programming when we write front-end code? What is our mental model for the running program?
 
 ## Runtime Environment
-
-We know JavaScript (and some other languages, because we are hip like that). We know that the code we write will run in some kind of modern browser. What does that mean, really?
 
 For our application-writing purposes, a Web browser is two things:
 
@@ -31,7 +31,7 @@ This is a very programmer-centric view, but hey - we are programmers.
 
 Nice, readable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious.
 
-Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world. And at the core of the object-oriented JavaScript is, of course, the object. In our examples and sketches we will stick to the basic idioms of object definition and creation, such as this:
+Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world. And at the core of the object-oriented JavaScript is, of course, the object. Here is a vanilla object prototype definition (kind of like a class but not quite):
 
 ```js
 function MyObjectType() {
@@ -46,16 +46,10 @@ MyObjectType.prototype.applySomeBehaviour = function () {
 var obj = new MyObjectType();
 ```
 
-It's... rustic? But it works and is universally recognized. The underscore prefix notation for private members is grating to some programmers, but again in many circles it has been accepted as a signal of intent, so we'll stick with it.
+There are other conventions, of course, but this will do for now.
 
-Class inheritance is something we just won't even touch - it is the author's belief that JS explicitly forces a preference for composition over inheritance, so we will get by with that just fine.
+## Objects Everywhere
 
-Of course, many production frameworks won't have us defining components this way. There are good reasons sometimes, although not always. But one way or another we can always *map the OOP concept* onto the framework-specific building blocks. This is still our lingua franca for understanding the underlying strategies of framework writers.
+Actual production code rarely looks like that today. No framework en vogue asks you to just define a vanilla class. For example, AngularJS allows defining "services", "controllers", "directives" and other types of components, React has a special notation to declare "component" classes, Backbone has "models" and "views". JQuery widgets work by attaching special message passing mechanisms to DOM element objects.
 
-## File Structure
-
-Let's start by mapping out the `javascripts`, `styles`, `images` directories... **kidding**!
-
-Honestly, whatever works. It is worth mentioning that there *is* a strong argument for keeping files organized by topic (e.g. `users`, `payments`, `socialSettings`), not by type of file (e.g. `scripts`, `styles`, `templates`). Any modern front-end codebase will pass through a build pipeline, and most contributors will have some cross-functional ability, so there should be more than enough freedom to lay out the files according to developer convenience, not specific deployment format.
-
-But again, whatever gets us to building the app.
+But we can always link the framework-specific building blocks back to the underlying OOP concept. There is always some encapsulated state, and some exposed contract for manipulating the state. So we can still use that as our lingua franca for planning out our own intent, as well as understanding the underlying strategies of existing framework code.
