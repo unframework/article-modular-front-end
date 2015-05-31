@@ -4,13 +4,17 @@ We want to do what we love - build software that does useful things, on the Web.
 
 We know computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser. We know JavaScript (and some other languages, because we are hip like that).
 
-But there are 1001 different front-end frameworks en vogue, each with its own lingo, vocal fan-base and often a completely custom set of command-line tools. Showing text and pictures on screen has never seemed so complicated.
+But as we dive into building things for the Web browser, we quickly discover that there isn't one clear way to do things. HTML and CSS are brittle and convoluted specifications, and then on top of that there are 1001 different front-end frameworks en vogue. Each one, naturally, has its own lingo, vocal fan-base and often a completely custom set of command-line tools. Showing text and pictures on screen has never seemed so complicated.
 
 Of course, it's not just about showing text and pictures. Codebases have to be maintained and added to, and a production framework helps manage code complexity to keep development speedy and reduce bugs. However, there is still clearly enough difference of opinion between framework writers about *how* the complexity is to be managed. Also, maintainability best practices are often left to be an undocumented "black art" even for popular tools.
 
-The best way to learn a tool is to rebuild it. Let's get back to timeless fundamentals that we learned in Software Engineering 101 and work through basic problem statements of front-end development with an open mind and playful attitude. That will give us an informed perspective on choice and usage of existing production frameworks.
+This entire situation has chaos written all over it, and as programmers we are wary of that in principle. Let's take control of all this uncertainty.
 
-Any framework is just a structure blueprint for a program, accompanied by useful bits of code. But *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
+What we will do is get back to the core problem statements and pain points of front-end programming, and learn by tackling them from scratch. We will apply timeless fundamental wisdom that we learned in Software Engineering 101, as well as just an open mind and a helping of playfulness.
+
+The goal is not to reinvent the wheel. We will build up an informed perspective on choice and usage of existing production frameworks - a great way to learn something is to re-create it.
+
+So *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
 
 ## Runtime Environment
 
