@@ -1,12 +1,16 @@
 # Starting Point
 
-It's a miracle: we just woke up from a 15-year coma that started in 2000 and deprived us from the fun of watching modern web frameworks duke it out in Internet comment threads over the years.
+We want to do what we love - build software that does useful things, on the Web.
 
-Now, we want to get back to doing what we love - building software that does useful things, on the Web.
+We know computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser. We know JavaScript (and some other languages, because we are hip like that).
 
-We still remember the computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser. We know JavaScript (and some other languages, because we are hip like that).
+But there are 1001 different front-end frameworks en vogue, each with its own lingo, vocal fan-base and often a completely custom set of command-line tools. Showing text and pictures on screen has never seemed so complicated.
 
-So what are we programming when we write front-end code? What is our mental model for the running program?
+Of course, it's not just about showing text and pictures. Codebases have to be maintained and added to, and a production framework helps manage code complexity to keep development speedy and reduce bugs. However, there is still clearly enough difference of opinion between framework writers about *how* the complexity is to be managed. Also, maintainability best practices are often left to be an undocumented "black art" even for popular tools.
+
+The best way to learn a tool is to rebuild it. Let's get back to timeless fundamentals that we learned in Software Engineering 101 and work through basic problem statements of front-end development with an open mind and playful attitude. That will give us an informed perspective on choice and usage of existing production frameworks.
+
+Any framework is just a structure blueprint for a program, accompanied by useful bits of code. But *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
 
 ## Runtime Environment
 
@@ -25,11 +29,11 @@ Those useful APIs include:
 - WebAudio
 - kitchen sink
 
-This is a very programmer-centric view, but hey - we are programmers.
+We are putting the JavaScript runtime at the center of the picture because that is, after all, where actual code runs. Focusing on the pure code first helps us relate programming wisdom from other environments (such as servers or embedded devices) to front-end development.
 
 ## Building Blocks
 
-Nice, readable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious.
+Readable, maintainable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious.
 
 Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world. And at the core of the object-oriented JavaScript is, of course, the object. Here is a vanilla object prototype definition (kind of like a class but not quite):
 
