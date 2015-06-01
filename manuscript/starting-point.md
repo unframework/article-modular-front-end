@@ -1,18 +1,16 @@
 # Starting Point
 
-We want to do what we love - build software that does useful things, on the Web.
+Typical developer training provides one with basic understanding of computer science, a level of comfort with simple object-oriented programming (OOP) and some exposure to the modern web technologies available in browsers. There is, of course, knowledge of JavaScript, but ideally also experience in some of the other well-known programming languages, for perspective.
 
-We know computer science basics, are comfortable with simple object-oriented programming (OOP) and have quickly brushed up on modern web technologies available in a typical browser. We know JavaScript (and some other languages, because we are hip like that).
+Importantly, we as programmers are also taught to use software engineering patterns to manage application complexity as codebases grow and change.
 
-But as we dive into building things for the Web browser, we quickly discover that there isn't one clear way to do things. HTML and CSS are brittle and convoluted specifications, and then on top of that there are 1001 different front-end frameworks en vogue. Each one, naturally, has its own lingo, vocal fan-base and often a completely custom set of command-line tools. Showing text and pictures on screen has never seemed so complicated.
+However, as we dive into building real production software for the Web, we quickly discover that it can be trying to make sense of it all. HTML and CSS are brittle and convoluted, and production front-end frameworks have a steep learning curve but often still lack real-world usage advice for software of any non-trivial size. Best practices for code maintainability are usually left to be an undocumented "black art" even for popular tools. Whatever advice is out there is hotly contested and encumbered with stack-specific assumptions and preferences.
 
-Of course, it's not just about showing text and pictures. Codebases have to be maintained and added to, and a production framework helps manage code complexity to keep development speedy and reduce bugs. However, there is still clearly enough difference of opinion between framework writers about *how* the complexity is to be managed. Also, maintainability best practices are often left to be an undocumented "black art" even for popular tools.
+To take control of this chaotic situation, we need to start from scratch. The best way to learn something is to build it.
 
-This entire situation has chaos written all over it, and as programmers we are wary of that in principle. Let's take control of all this uncertainty.
+We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. By doing that we will build up an informed perspective on choice and usage of existing production frameworks.
 
-What we will do is get back to the core problem statements and pain points of front-end programming, and learn by tackling them from scratch. We will apply timeless fundamental wisdom that we learned in Software Engineering 101, as well as just an open mind and a helping of playfulness.
-
-The goal is not to reinvent the wheel. We will build up an informed perspective on choice and usage of existing production frameworks - a great way to learn something is to re-create it.
+First, let's survey our runtime environment as well as our software engineering toolbox.
 
 So *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
 
@@ -35,29 +33,14 @@ Those useful APIs include:
 
 We are putting the JavaScript runtime at the center of the picture because that is, after all, where actual code runs. Focusing on the pure code first helps us relate programming wisdom from other environments (such as servers or embedded devices) to front-end development.
 
+Next, let's cover the strategies that we can use to manage complexity of that code.
+
 ## Building Blocks
 
-Readable, maintainable code uses language constructs to represent real-world concepts. This way it is easier to "think in code" and keep things self-documenting and obvious.
+We subdivide code into modules. Each code module is simply a grouping of code that exposes a well-defined interface that can be accessed by outside code.
 
-Given that JavaScript is an object-oriented programming language, we will use the OOP paradigm (as well as others) to model the real world. And at the core of the object-oriented JavaScript is, of course, the object. Here is a vanilla object prototype definition (kind of like a class but not quite):
+Object-oriented programming introduces a notion of an object - a set of data (also referred to as *state*) that is hidden from direct access and defines an object interface - methods (functions attached to the object) and fields that outside code can interact with. Object type implementation is a module of code.
 
-```js
-function MyObjectType() {
-    this._foo = 1; // underscore prefix conventionally denotes private state
-    this.baz = 2; // public field
-}
+Well-designed object interfaces are small, simple and stable. We aim to hide implementation details and direct data access from outside code. Unit tests help ensure that the implementation of the object interface continues to match expectations as it is being updated and refactored. It so happens that code that is easy to test is also easy to maintain.
 
-MyObjectType.prototype.applySomeBehaviour = function () {
-    this._foo += 5;
-}
-
-var obj = new MyObjectType();
-```
-
-There are other conventions, of course, but this will do for now.
-
-## Objects Everywhere
-
-Actual production code rarely looks like that today. No framework en vogue asks you to just define a vanilla class. For example, AngularJS allows defining "services", "controllers", "directives" and other types of components, React has a special notation to declare "component" classes, Backbone has "models" and "views". JQuery widgets work by attaching special message passing mechanisms to DOM element objects.
-
-But we can always link the framework-specific building blocks back to the underlying OOP concept. There is always some encapsulated state, and some exposed contract for manipulating the state. So we can still use that as our lingua franca for planning out our own intent, as well as understanding the underlying strategies of existing framework code.
+Our software models the real world - the domain, so naturally our modules and object definitions have to describe real-world concepts. It helps to keep a one-to-one correspondence between code components and specific parts of the domain description. It's not just using a `Car` object class to describe a car, but also modeling behaviours and flows as separate modules too, sometimes.
