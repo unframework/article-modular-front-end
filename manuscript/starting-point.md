@@ -8,11 +8,11 @@ However, as we dive into building real production software for the Web, we quick
 
 To take control of this chaotic situation, we need to start from scratch. The best way to learn something is to build it.
 
-We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. By doing that we will build up an informed perspective on choice and usage of existing production frameworks.
+We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. That will give us a properly anchored, informed perspective on choice and usage of existing production frameworks.
 
 First, let's survey our runtime environment as well as our software engineering toolbox.
 
-So *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
+*What* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
 
 ## Runtime Environment
 
@@ -39,8 +39,8 @@ Next, let's cover the strategies that we can use to manage complexity of that co
 
 We subdivide code into modules. Each code module is simply a grouping of code that exposes a well-defined interface that can be accessed by outside code.
 
-Object-oriented programming introduces a notion of an object - a set of data (also referred to as *state*) that is hidden from direct access and defines an object interface - methods (functions attached to the object) and fields that outside code can interact with. Object type implementation is a module of code.
+Object-oriented programming introduces the notion of an object - a set of data (also referred to as *state*) that is hidden from direct access and defines an object interface - methods (functions attached to the object) and fields that outside code can interact with. Object type implementation is a module of code.
 
 Well-designed object interfaces are small, simple and stable. We aim to hide implementation details and direct data access from outside code. Unit tests help ensure that the implementation of the object interface continues to match expectations as it is being updated and refactored. It so happens that code that is easy to test is also easy to maintain.
 
-Our software models the real world - the domain, so naturally our modules and object definitions have to describe real-world concepts. It helps to keep a one-to-one correspondence between code components and specific parts of the domain description. It's not just using a `Car` object class to describe a car, but also modeling behaviours and flows as separate modules too, sometimes.
+Our software models the real world - the domain - so naturally our modules and object definitions have to describe real-world concepts. It helps to maintain one-to-one correspondence between code components and specific parts of the domain description. Because we already keep the domain model in our head, it becomes less of a stretch to transfer thinking into written code, and easier to mentally step through interactions between existing modules.
