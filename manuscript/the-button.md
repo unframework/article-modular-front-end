@@ -151,6 +151,8 @@ function createStandardButton(isFullWidth) {
 
 The standard button component now clearly declares the kinds of display styles it supports (normal and full-width), and no other code needs to break its encapsulation boundary. The sidebar will simply ask the button to render full-width, as can any other component.
 
+> The `-` prefix in `-full-width` is inspired by the BEM naming convention. BEM is a set of recommendations that we are not following verbatim (our starting point is a bit more application-centric) but the dash-modifier syntax combined with multi-class selector is excellent for avoiding accidentally triggering another component's CSS declarations.
+
 ## CSS Inheritance and Tag Selectors
 
 Style entanglement and encapsulation-breaking can happen when a project has blanket tag-based rules like this:
@@ -168,3 +170,48 @@ Another dangerous pattern is inheritance of properties like font family or sizin
 Most production projects use a CSS preprocessor like SCSS or LESS. Those tools offer much more flexible and maintainable ways to reuse CSS code and settings than naïve inheritance and tag-only selectors: mixins (extensions) and variables.
 
 If the developer intent is to use a common app-wide theme setting, like a main body font, then that is what variables are for. If the intent is to reuse utility code, then mixins/extensions are the right tool for the job. That produces less bugs and code that is much more readable.
+
+## Multi-Element Component CSS
+
+Let's imagine that the standard button style got an upgrade. It now includes a faux-3D inset groove around it. Instead of playing around with `::before` and `::after` elements (seeing as the width of the button is dependent on label text), we will just surround it with a `span` node and add the extra styling to that.
+
+Because we were strict about encapsulation, there is no change to the code outside of the standard button component. The component implementation will have to be adjusted to create the extra DOM, of course.
+
+The `standard-button` class will be on the surrounding `span`, since it is the component base element now. But how are we going to target the button in our component CSS? The easiest thing to do is use a selector as follows:
+
+```css
+.standard-button > button {
+    /* ... moving existing button style here */
+}
+```
+
+The `>` (immediate-child) selector ensures that if we ever decide to allow adding arbitrary content deeper inside our component we will not accidentally style its own `button` elements with that rule. It is fast, and has been supported in every browser released in the last 8 years.
+
+The component JS is changed accordingly:
+
+```js
+function createStandardButton(isFullWidth) {
+    var dom = document.createElement('span'); // base element is now a SPAN
+    dom.className = 'standard-button';
+
+    if (isFullWidth) {
+        dom.className += ' -full-width';
+    }
+
+    dom.appendChild(document.createElement('button'));
+
+    return dom;
+}
+```
+
+Now, imagine that we need to add an icon of some kind to the standard button component. It may not be visible at first but show up if we pass a corresponding flag during component creation. We need to add another DOM element under the base `span`, to be the sibling of our `button` node, but since it is purely decorative, we will make it a `span` tag itself. How do we target the child `span` node?
+
+We can add a CSS class to it, of course. But it should not be something like `icon`, because there might be an app component called `icon` as well - they would step on each others' toes! Given that this icon DOM node is "private" to our standard button component, we want to mark it accordingly: `_icon`.
+
+```css
+.standard-button > ._icon {
+    /* ... add icon display CSS here */
+}
+```
+
+> The `_` prefix in `_icon` is also inspired by BEM naming conventions. The latter suggests using a fully-qualified namespaced class name using double-underscore (`__`) as separator; in our case that would be `standard-button__icon`. However, we still want to use the direct child selector (`>`) in our CSS, and that already restricts the stylesheet scope sufficiently well. That allows us to opt for a shorter syntax of just prefixing with `_`.
