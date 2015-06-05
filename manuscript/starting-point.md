@@ -1,14 +1,12 @@
 # Starting Point
 
-Typical developer training provides one with basic understanding of computer science, a level of comfort with simple object-oriented programming (OOP) and some exposure to the modern web technologies available in browsers. There is, of course, knowledge of JavaScript, but ideally also experience in some of the other well-known programming languages, for perspective.
+HTML and CSS is a brittle and convoluted combination of technologies; production front-end frameworks have a steep learning curve. At the same time, best practices for code maintainability are usually left to be an undocumented "black art", even for popular tools. Whatever advice is out there is hotly contested and encumbered with stack-specific assumptions and preferences.
 
-Importantly, we as programmers are also taught to use software engineering patterns to manage application complexity as codebases grow and change.
+Regardless of experience level in the industry - introductory to seasoned - we don't want to just learn the tutorial trivia of a technology or framework. We want to know how it fits into the general goals of good programming - speed of development and ease of maintainability. A huge amount of software engineering wisdom has been accumulated and documented over the last few decades: surely it can apply just as well to the front-end software domain.
 
-However, as we dive into building real production software for the Web, we quickly discover that it can be trying to make sense of it all. HTML and CSS are brittle and convoluted, and production front-end frameworks have a steep learning curve but often still lack real-world usage advice for software of any non-trivial size. Best practices for code maintainability are usually left to be an undocumented "black art" even for popular tools. Whatever advice is out there is hotly contested and encumbered with stack-specific assumptions and preferences.
+To make a connection from front-end tech to basic foundations of programming, we need to start from scratch. The best way to learn something is to build it.
 
-To take control of this chaotic situation, we need to start from scratch. The best way to learn something is to build it.
-
-We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. That will give us a properly anchored, informed perspective on choice and usage of existing production frameworks.
+We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. That will give us a properly anchored, informed perspective on choice and usage of existing production frameworks. The goal, after all, is not to reinvent the wheel, but just get a more comprehensive feel and instinct for using well-known and well-supported tools.
 
 First, let's survey our runtime environment as well as our software engineering toolbox.
 
@@ -44,3 +42,5 @@ Object-oriented programming introduces the notion of an object - a set of data (
 Well-designed object interfaces are small, simple and stable. We aim to hide implementation details and direct data access from outside code. Unit tests help ensure that the implementation of the object interface continues to match expectations as it is being updated and refactored. It so happens that code that is easy to test is also easy to maintain.
 
 Our software models the real world - the domain - so naturally our modules and object definitions have to describe real-world concepts. It helps to maintain one-to-one correspondence between code components and specific parts of the domain description. Because we already keep the domain model in our head, it becomes less of a stretch to transfer thinking into written code, and easier to mentally step through interactions between existing modules.
+
+Now we can start looking at typical front-end tasks through the lens of modularization and establishing simple and reliable component architecture.
