@@ -85,30 +85,37 @@ function createStandardButton() {
 
 We are now using familiar CSS markup, and that allows for easier reading from a conventional front-end point of view. But this is still a software component, and there are specific caveats to be aware of, so as not to lose the benefits of modularity.
 
-The simplest concern is that we used to have a single file describing a single component, and now we have two: `.css` and `.js`. To deal with that structural split, there are some conventions that help:
+The simplest concern is that we used to have a single file describing a single component, and now we have two: `.css` and `.js`. To prevent confusion, the files should have the same name (matching the component) and possibly even placed into a dedicated sub-folder.
 
-- component files should at least have a matching name (corresponding to the logical component name: `StandardButton`)
-- component files should be placed in the same folder, likely named after the component or the component topic
+But there is a bigger Pandora's box that has been opened. CSS is incredibly leaky and hard to encapsulate! Creators of the CSS spec were originally only targeting traditional web-pages and treated them as one large component. They were not planning for application-grade features such reliable module scoping that a full programming language would support.
 
-But there is a bigger Pandora's box that has been opened.
+To help clean up unwanted CSS leaks and cruft there is a simple rule to stick by.
+
+## Sole Sourced CSS
+
+Every part of computed element style should come from the owner component's code (either JS or CSS). That, and only that. Built-in browser style is the only exception.
+
+In other words, inspecting any DOM element using browser developer tools should show that its entire set of rendering instructions are coming from just one specific spot in the source code - a screenful of stylesheet markup or a small well-contained piece of JS.
+
+That is *sole-sourced CSS*. There is one authority for displayed element style, and it is the component that created it. No overrides by other components, no "mystery inheritance" from from a DOM parent, etc.
+
+Let's get into deeper detail as to what that means.
 
 ## CSS Classes Are Globals
 
-Assigning a class to a DOM node (as we did using `dom.className = 'standard-button'` above) instructs the browser to dump *any* style instructions attached to that class name onto that node. The same behaviour that allows us to define button styling from the component CSS file allows *everyone else* to override it!
+Assigning a class to a DOM node (as we did using `dom.className = 'standard-button'` above) allows us to give it style instructions based on that class name in the component CSS code. But the same browser behaviour allows *anyone else* to override it!
 
-This has been one of the essential behaviours of CSS since it was invented, but only because the creators of CSS were targeting traditional web-pages and treated them as one large component. We want to promote tight scoping and keeping things local instead, to help our encapsulation, but CSS allows anyone to hijack our component class string and start overriding style properties.
+There are newer APIs like shadow DOM that actually implement proper CSS isolation, but many production browsers are not yet ready for that.
 
-The newer shadow DOM APIs (part of the Web Components spec) can completely hide DOM elements from page-wide stylesheet influence, which negates the unwanted default CSS behaviour, but the current generation of browsers and frameworks in the wild can't fully support that spec just yet.
-
-Simply being aware of that concern is already enough to prevent issues in practice. Keeping component class names specific, fully qualified and long helps signal intent to teammates: that the CSS declaration is a tightly controlled component style, and should not be overridden.
-
-But there is another CSS-related caveat - the issue is that sometimes developers *need* to override the CSS style inside a component!
+For now, simply being aware of that concern is already enough to prevent issues in practice. Keeping component class names specific, fully qualified and long helps signal intent to teammates: that the CSS declaration is a tightly controlled component style, and should not be overridden.
 
 ## Component CSS Modifiers
 
-A teammate has added an instance of our standard button component inside a sidebar menu. But the button is auto-sized to fit around the text inside it - and the teammate needs that particular instance of the button to fill the width of the sidebar.
+Sometimes developers *need* to override the CSS style inside a component!
 
-What immediately comes to mind:
+Let's say a teammate has added an instance of our standard button component inside a sidebar menu. But the button is auto-sized to fit around the text inside it - and the teammate needs that particular instance of the button to fill the width of the sidebar.
+
+What immediately comes to mind is to override the original component CSS rule:
 
 ```css
 .sidebar-menu .standard-button {
@@ -117,11 +124,12 @@ What immediately comes to mind:
 }
 ```
 
-But of course this is completely counter to our modular code instincts. Now changing the standard button style means also following up on every single instance of this kind of context-specific "tweak". If this additional CSS is in the sidebar-related stylesheet file, that means it might be forgotten. If this CSS tweak is in the same file as the main standard button stylesheet, then modifying or removing the sidebar might leave this rule behind as "cruft" that never gets cleaned up.
+But of course this is completely counter to our modular code instincts. The sidebar CSS code is now interfering with the button CSS code, kind of like a piece of JavaScript function monkey-patching private state of another object. The sidebar and the button are too "aware" of each other now, and there is no clear interface between them.
 
-Instead, we will add this special case to the standard button stylesheet, and explicitly present it as a modification of the typical standard button display:
+Instead, we will extend the standard button interface to support a full-width mode in addition to the normal sizing mode.
 
 ```css
+/* ... added right after existing standard button code */
 .standard-button.-full-width {
     box-sizing: border-box;
     width: 100%;
@@ -141,7 +149,7 @@ function createStandardButton(isFullWidth) {
 }
 ```
 
-The standard button component now clearly declares the kinds of display styles it supports (normal and full-width for now), and no other code needs to break its encapsulation boundary. The sidebar will simply ask the button to render full-width.
+The standard button component now clearly declares the kinds of display styles it supports (normal and full-width), and no other code needs to break its encapsulation boundary. The sidebar will simply ask the button to render full-width, as can any other component.
 
 ## CSS Inheritance and Tag Selectors
 
@@ -153,16 +161,10 @@ button {
 }
 ```
 
-Specific component style may either have to override it or, worse yet, *rely on it*. The latter is problematic because now changing that generic `button` style to anything else will possibly break everything in the project.
+Specific component style may either have to override it or, worse yet, *rely on it*. That is problematic because now changing that generic `button` style to anything else will possibly break everything in the project.
 
 Another dangerous pattern is inheritance of properties like font family or sizing. It may seem convenient to just define the font on the body and add `font-family: inherit` everywhere else. However, what we want as our intent is "make my element use main body font" and yet what we get as behaviour is "make my element use parent element font". Which breaks spectacularly when a given parent element decides to use, let's say, red Papyrus as its font face instead of the main body font!
 
-Given that most project build pipelines use a CSS preprocessor like SCSS or LESS, it is trivial to define the intended body font as an app-wide theme variable and then just explicitly use that. In fact, to help immediately detect font leaks the actual body element stylesheet could include a red Papyrus or Comic Sans setting - a quick way to highlight component styles vulnerable to broken encapsulation.
+Most production projects use a CSS preprocessor like SCSS or LESS. Those tools offer much more flexible and maintainable ways to reuse CSS code and settings than naïve inheritance and tag-only selectors: mixins (extensions) and variables.
 
-## Sole Sourced CSS Rule
-
-We can see the broad logic behind specific CSS restrictions and naming rules now.
-
-Every part of computed element style should come from the owner component's code (either JS or CSS). Opening the browser developer console and inspecting any DOM element should show that its entire set of rendering instructions are coming from just one specific spot in the source code - a screenful of stylesheet markup or a small well-contained piece of JS.
-
-That is *sole-sourced CSS*.
+If the developer intent is to use a common app-wide theme setting, like a main body font, then that is what variables are for. If the intent is to reuse utility code, then mixins/extensions are the right tool for the job. That produces less bugs and code that is much more readable.
