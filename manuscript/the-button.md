@@ -1,12 +1,26 @@
 # The Button
 
-A good app has a consistent visual language, and a well-maintained style guide. One typical element of such a style guide is the standard action button.
+A good app has a consistent visual language, and a well-maintained style guide. And almost every visual language includes a notion of the standard action button. It is used to let the user trigger form submission, popup prompt acceptance/dismissal, and informs the style of some of the other clickable/interactable parts of the user interface.
 
-It is likely to be rectangular, with somewhat rounded corners, some sort of pseudo-relief effect and various styles of shadow. Font is, of course, very significant. Colour options are also a defining feature. Bootstrap 3, for example, defines "default" and "primary" types of buttons (in addition to a few others). The primary button is prominent and colourful, and the default button, well, sort of blends in.
-
-Let's use the standard button as an opportunity to introduce visual components as a concept, and look at how classic code modularity techniques plug into the browser world.
+This component is ubiquitous but also simple to implement. It is a great first sample scenario for applying modularization patterns.
 
 ## Visual Contract
+
+Trivial advice would be to use an HTML button element, and hang some CSS on it. Legacy "Web-dev muscle memory" has us believe that this is a solved problem. But our strategy of reinventing from the ground up suggests that we look deeper.
+
+The standard action button is a software component, and as such it has a contract: a set of expectations that it upholds. That expectation does not stop at the DOM structure, though: it includes *everything*, even the appearance of what the user sees, down to the pixels! Of course, we don't actually render individual pixels - we delegate that to the browser - but the actual brunt of responsibility that the component as a whole isn't "broken" is still on us as maintainers.
+
+This approach of taking the entirety of responsibility for a component's presentation can also be described as *visual encapsulation*.
+
+> This is in contrast to the conventional wisdom of Web development. Separate HTML and CSS and JavaScript; write markup, then style it later: that works well for small content-driven websites (which was the majority of the Web when HTML/CSS was being invented). But for application development, where most of the time is spent *pivoting* code, this creates unexpected friction. Treating CSS as a separate layer essentially makes it a distinct component of its own, except with an exceedingly complex "interface". Stopping at DOM level instead of "pixel" level when designing our contracts actually exponentially multiplies the resulting code entanglement.
+
+Our contract starts with standard action button appearance itself.
+
+## Naïve Implementation
+
+The standard action button is likely to be rectangular, with somewhat rounded corners, some sort of pseudo-relief effect and various styles of shadow. Font is, of course, very significant. Colour options are also a defining feature. Bootstrap 3, for example, defines "default" and "primary" types of buttons (in addition to a few others). The primary button is prominent and colourful, and the default button, well, sort of blends in.
+
+Let's use the standard button as an opportunity to introduce visual components as a concept, and look at how classic code modularity techniques plug into the browser world.
 
 A standard app button as a component has a simple expectation: ensure that the corresponding DOM element exists in a given spot of the page DOM hierarchy, and is displayed a specific way.
 
@@ -18,7 +32,7 @@ function createStandardButton() {
 }
 ```
 
-Wait, the displayed button is not looking quite right, let's make it look closer to our hypothetical style guide:
+Wait, the displayed button is not looking quite right - it's missing the styling. Let's make it look closer to our hypothetical style guide:
 
 ```js
 function createStandardButton() {
