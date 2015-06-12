@@ -58,11 +58,11 @@ function createStandardButton() {
 }
 ```
 
-Looking at that code, a developer might either feel disgust or intrigue. Where is the CSS? Aren't inline styles bad?
+Looking at that code, a developer might either feel disgust or intrigue. Where is the CSS? Aren't inline styles bad? But this is actually not inline style! These CSS instructions are encapsulated, named and normalized - but in a JavaScript function as opposed to a CSS class declaration.
 
-Let's recall our component contract: just make a button happen, and make it look the right way. The rest is a black box: implementation of a component is free be anything that fulfills the contract expectations. So what matters primarily is the *runtime computed style* of the `button` DOM node. What we have so far is not pretty, and is certainly not typical, but it matches the component specification exactly. If we had a unit test for this piece of code, it would pass just fine.
+Let's recall our component contract: just make a button "happen", and make it look the right way. The rest is a black box: implementation of a component is free be anything that fulfills the contract expectations. So what matters primarily is the *runtime computed style* of the `button` DOM node. What we have so far is not pretty, and is certainly not typical, but it matches the component specification exactly. If we had a unit test for this piece of code, it would pass just fine.
 
-There is a growing movement defending inline styles, with a lot of merit going for it. But we are going to be pragmatic and return to a more traditional CSS authoring approach.
+There is a growing movement defending JavaScript-defined styling like this, with a lot of merit going for it. But we are going to turn down the novelty factor and return to a more traditional CSS authoring approach.
 
 ## Introducing CSS
 
