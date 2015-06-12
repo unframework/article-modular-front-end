@@ -8,7 +8,7 @@ Software process success means improving speed of development and ease of mainta
 
 Additionally, as time goes on some team members leave and new ones join: precious project knowledge is lost to attrition, and new contributors have to be efficiently on-boarded to become productive. A good codebase, then, is transparent and delightful to learn and makes it easier to see past developers' intent.
 
-To help with those goals, a huge amount of software engineering wisdom has been accumulated and documented over the last few decades. Surely it can apply just as well to the front-end software domain! We will survey and re-frame current in-browser production code tools and techniques through that simple lens - building solid, simple and resilient application codebases.
+As we explore the front-end software stack, we want to know how to stay true to those goals when coding in the browser. There is already a huge amount of software engineering wisdom that has been accumulated and documented over the last few decades. This book will survey and re-frame current in-browser production code tools and techniques through that timeless lens - with a focus on building solid, simple and resilient application codebases.
 
 ## From Scratch
 
