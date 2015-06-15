@@ -49,6 +49,8 @@ Well-designed object interfaces are small, simple and stable. We aim to hide imp
 
 Our software models the real world - the domain - hence naturally our modules and object definitions have to describe real-world concepts. It helps to maintain one-to-one correspondence between code components and specific parts of the domain description. Because we already keep the domain model in our head, it becomes less of a stretch to transfer thinking into written code, and easier to mentally step through interactions between existing modules.
 
+As we implement user interfaces, we start noticing a pattern: a continuous flow of data from "pure model" code to the presentation and layout code. As the business logic data structures change (e.g. user information, item counts, incoming notifications), those changes propagate down to the code that displays the data on screen or other devices. Streamlining that change management is a topic of *reactive programming*, and it is clearly a huge benefit to use it as one of our code structuring strategies. However, it needs to naturally fit into our modularization efforts, which is not always trivial.
+
 This is just a brief inventory of some of the strategies at our disposal; we will get into more depth as we go along with the example scenarios.
 
 We can now start examining typical front-end tasks through the lens of modularization and exploring component architecture patterns that will keep production code simple and reliable.
