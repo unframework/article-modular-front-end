@@ -10,9 +10,9 @@ Trivial advice would be to use an HTML button element, and hang some CSS on it. 
 
 The standard action button is a software component, and as such it has a contract: a set of expectations that it upholds. That expectation does not stop at the DOM structure, though: it includes *everything*, even the appearance of what the user sees, down to the pixels! Of course, we don't actually render individual pixels - we delegate that to the browser - but the actual brunt of responsibility that the component as a whole isn't "broken" is still on us as maintainers.
 
-This approach of taking the entirety of responsibility for a component's presentation can also be described as *visual encapsulation*.
+This approach of taking the entirety of responsibility for a component's presentation can also be described as *visual encapsulation*. In other words, our component takes over a "patch" of screen area and enforces a certain look of it, as part of its promise to the rest of the codebase.
 
-> This is in contrast to the conventional wisdom of Web development. Separate HTML and CSS and JavaScript; write markup, then style it later: that works well for small content-driven websites (which was the majority of the Web when HTML/CSS was being invented). But for application development, where most of the time is spent *pivoting* code, this creates unexpected friction. Treating CSS as a separate layer essentially makes it a distinct component of its own, except with an exceedingly complex "interface". Stopping at DOM level instead of "pixel" level when designing our contracts actually exponentially multiplies the resulting code entanglement.
+> This is in contrast to the conventional wisdom of Web development. Legacy advice tells us to separate HTML and CSS and JavaScript, to write markup and then style it separately. That works well for small content-driven websites (which was the majority of the Web when HTML/CSS was being invented) and for the typical team skill make-up of the early 2000s. But for application development, where teams are more cross-functional and where most of the time is spent *pivoting* code, this creates unexpected friction. Treating CSS as a separate layer essentially makes it a distinct "component" of its own, except with an exceedingly complex interface. Stopping at DOM level instead of "pixel" level when designing our contracts actually exponentially multiplies the resulting code interdependencies.
 
 Our contract starts with standard action button appearance itself.
 
@@ -103,15 +103,15 @@ The simplest concern is that we used to have a single file describing a single c
 
 But there is a bigger Pandora's box that has been opened. CSS is incredibly leaky and hard to encapsulate! Creators of the CSS spec were originally only targeting traditional web-pages and treated them as one large component. They were not planning for application-grade features such reliable module scoping that a full programming language would support.
 
-To help clean up unwanted CSS leaks and cruft there is a simple rule to stick by.
+To help clean up unwanted CSS leaks and cruft there is a simple rule to stick by: ensure sole-sourced CSS.
 
-## Sole Sourced CSS
+## Sole-Sourced CSS
 
 Every part of computed element style should come from the owner component's code (either JS or CSS). That, and only that. Built-in browser style is the only exception.
 
 In other words, inspecting any DOM element using browser developer tools should show that its entire set of rendering instructions are coming from just one specific spot in the source code - a screenful of stylesheet markup or a small well-contained piece of JS.
 
-That is *sole-sourced CSS*. There is one authority for displayed element style, and it is the component that created it. No overrides by other components, no "mystery inheritance" from from a DOM parent, etc.
+That is *sole-sourced CSS*. There is one authority for displayed element style, and it is the component codebase that creates and manages it. No overrides by other components, no "mystery inheritance" from a DOM parent, etc.
 
 Let's get into deeper detail as to what that means.
 
@@ -181,9 +181,7 @@ Specific component style may either have to override it or, worse yet, *rely on 
 
 Another dangerous pattern is inheritance of properties like font family or sizing. It may seem convenient to just define the font on the body and add `font-family: inherit` everywhere else. However, what we want as our intent is "make my element use main body font" and yet what we get as behaviour is "make my element use parent element font". Which breaks spectacularly when a given parent element decides to use, let's say, red Papyrus as its font face instead of the main body font!
 
-Most production projects use a CSS preprocessor like SCSS or LESS. Those tools offer much more flexible and maintainable ways to reuse CSS code and settings than naïve inheritance and tag-only selectors: mixins (extensions) and variables.
-
-If the developer intent is to use a common app-wide theme setting, like a main body font, then that is what variables are for. If the intent is to reuse utility code, then mixins/extensions are the right tool for the job. That produces less bugs and code that is much more readable.
+Most production projects use a CSS preprocessor like SCSS or LESS. Those tools offer much more flexible and maintainable ways to reuse CSS code and settings than naïve inheritance and tag-only selectors: mixins (extensions) and variables. If the developer intent is to use a common app-wide theme setting, like a main body font, then that is what variables are for. If the intent is to reuse utility code, then mixins/extensions are the right tool for the job. That produces less bugs and code that is much more readable.
 
 ## Multi-Element Component CSS
 
@@ -229,3 +227,5 @@ We can add a CSS class to it, of course. But it should not be something like `ic
 ```
 
 > The `_` prefix in `_icon` is also inspired by BEM naming conventions. The latter suggests using a fully-qualified namespaced class name using double-underscore (`__`) as separator; in our case that would be `standard-button__icon`. However, we still want to use the direct child selector (`>`) in our CSS, and that already restricts the stylesheet scope sufficiently well. That allows us to opt for a shorter syntax of just prefixing with `_`.
+
+This covers most implementation needs of rendering a component under our new guidelines of visual encapsulation and sole-sourced CSS.
