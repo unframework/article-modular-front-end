@@ -27,34 +27,36 @@ A standard app button as a component has a simple expectation: ensure that the c
 Naïve starting point:
 
 ```js
-function createStandardButton() {
-    return document.createElement('button');
+function StandardButton() {
+    this.dom = document.createElement('button');
 }
 ```
+
+Simple object-oriented programming: we represent the component at runtime as a vanilla JavaScript object instance. All the implementation does right now is create a DOM element to help render the desired button look, but we keep the clear distinction that the component is not the DOM element *itself*. It's just an object instance. We do not promise anything else, yet.
+
+Outside calling code does, of course, need to attach the DOM element that we created to the visible page content tree, but that step is outside of our implementation's concern. We just expose the `button` reference as a public `dom` property for anyone to access it (but pinky-swear to not modify to respect our encapsulation intent).
 
 Wait, the displayed button is not looking quite right - it's missing the styling. Let's make it look closer to our hypothetical style guide:
 
 ```js
-function createStandardButton() {
-    var dom = document.createElement('button');
+function StandardButton() {
+    this.dom = document.createElement('button');
 
     // style inspired by Bootstrap 3
-    dom.style.display = 'inline-block';
-    dom.style.marginBottom = '0';
-    dom.style.border = '1px solid transparent';
-    dom.style.borderRadius = '3px';
+    this.dom.style.display = 'inline-block';
+    this.dom.style.marginBottom = '0';
+    this.dom.style.border = '1px solid transparent';
+    this.dom.style.borderRadius = '3px';
 
-    dom.style.padding = '5px 10px';
-    dom.style.fontSize = '14px';
-    dom.style.fontWeight = '400';
-    dom.style.lineHeight = 1.5;
-    dom.style.textAlign = 'center';
-    dom.style.verticalAlign = 'middle';
+    this.dom.style.padding = '5px 10px';
+    this.dom.style.fontSize = '14px';
+    this.dom.style.fontWeight = '400';
+    this.dom.style.lineHeight = 1.5;
+    this.dom.style.textAlign = 'center';
+    this.dom.style.verticalAlign = 'middle';
 
-    dom.style.whiteSpace = 'nowrap';
-    dom.style.cursor = 'pointer';
-
-    return dom;
+    this.dom.style.whiteSpace = 'nowrap';
+    this.dom.style.cursor = 'pointer';
 }
 ```
 
@@ -89,11 +91,9 @@ The simplest way to replicate the above behaviour using CSS markup is to just sp
 ```
 
 ```js
-function createStandardButton() {
-    var dom = document.createElement('button');
-    dom.className = 'standard-button';
-
-    return dom;
+function StandardButton() {
+    this.dom = document.createElement('button');
+    this.dom.className = 'standard-button';
 }
 ```
 
@@ -117,7 +117,7 @@ Let's get into deeper detail as to what that means.
 
 ## CSS Classes Are Globals
 
-Assigning a class to a DOM node (as we did using `dom.className = 'standard-button'` above) allows us to give it style instructions based on that class name in the component CSS code. But the same browser behaviour allows *anyone else* to override it!
+Assigning a class to a DOM node (as we did using `this.dom.className = 'standard-button'` above) allows us to give it style instructions based on that class name in the component CSS code. But the same browser behaviour allows *anyone else* to override it!
 
 There are newer APIs like shadow DOM that actually implement proper CSS isolation, but many production browsers are not yet ready for that.
 
@@ -151,15 +151,13 @@ Instead, we will extend the standard button interface to support a full-width mo
 ```
 
 ```js
-function createStandardButton(isFullWidth) {
-    var dom = document.createElement('button');
-    dom.className = 'standard-button';
+function StandardButton(isFullWidth) {
+    this.dom = document.createElement('button');
+    this.dom.className = 'standard-button';
 
     if (isFullWidth) {
-        dom.className += ' -full-width';
+        this.dom.className += ' -full-width';
     }
-
-    return dom;
 }
 ```
 
@@ -202,17 +200,15 @@ The `>` (immediate-child) selector ensures that if we ever decide to allow addin
 The component JS is changed accordingly:
 
 ```js
-function createStandardButton(isFullWidth) {
-    var dom = document.createElement('span'); // base element is now a SPAN
-    dom.className = 'standard-button';
+function StandardButton(isFullWidth) {
+    this.dom = document.createElement('span'); // base element is now a SPAN
+    this.dom.className = 'standard-button';
 
     if (isFullWidth) {
-        dom.className += ' -full-width';
+        this.dom.className += ' -full-width';
     }
 
-    dom.appendChild(document.createElement('button'));
-
-    return dom;
+    this.dom.appendChild(document.createElement('button'));
 }
 ```
 
