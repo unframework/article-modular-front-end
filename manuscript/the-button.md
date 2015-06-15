@@ -36,11 +36,12 @@ Simple object-oriented programming: we represent the component at runtime as a v
 
 Outside calling code does, of course, need to attach the DOM element that we created to the visible page content tree, but that step is outside of our implementation's concern. We just expose the `button` reference as a public `dom` property for anyone to access it (but pinky-swear to not modify to respect our encapsulation intent).
 
-Wait, the displayed button is not looking quite right - it's missing the styling. Let's make it look closer to our hypothetical style guide:
+Wait, the displayed button is not looking quite right - it's missing the styling and the text. Let's make it look closer to our hypothetical style guide:
 
 ```js
-function StandardButton() {
+function StandardButton(labelText) {
     this.dom = document.createElement('button');
+    this.dom.appendChild(document.createTextNode(labelText));
 
     // style inspired by Bootstrap 3
     this.dom.style.display = 'inline-block';
@@ -91,9 +92,10 @@ The simplest way to replicate the above behaviour using CSS markup is to just sp
 ```
 
 ```js
-function StandardButton() {
+function StandardButton(labelText) {
     this.dom = document.createElement('button');
     this.dom.className = 'standard-button';
+    this.dom.appendChild(document.createTextNode(labelText));
 }
 ```
 
@@ -151,9 +153,10 @@ Instead, we will extend the standard button interface to support a full-width mo
 ```
 
 ```js
-function StandardButton(isFullWidth) {
+function StandardButton(labelText, isFullWidth) {
     this.dom = document.createElement('button');
     this.dom.className = 'standard-button';
+    this.dom.appendChild(document.createTextNode(labelText));
 
     if (isFullWidth) {
         this.dom.className += ' -full-width';
@@ -200,7 +203,7 @@ The `>` (immediate-child) selector ensures that if we ever decide to allow addin
 The component JS is changed accordingly:
 
 ```js
-function StandardButton(isFullWidth) {
+function StandardButton(labelText, isFullWidth) {
     this.dom = document.createElement('span'); // base element is now a SPAN
     this.dom.className = 'standard-button';
 
@@ -208,7 +211,9 @@ function StandardButton(isFullWidth) {
         this.dom.className += ' -full-width';
     }
 
-    this.dom.appendChild(document.createElement('button'));
+    var buttonNode = document.createElement('button');
+    buttonNode.appendChild(document.createTextNode(labelText));
+    this.dom.appendChild(buttonNode);
 }
 ```
 
