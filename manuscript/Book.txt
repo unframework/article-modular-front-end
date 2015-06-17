@@ -1,3 +1,7 @@
 starting-point.md
 the-button.md
 maintainable-layout.md
+urls-and-routing.md
+reactive-repaint.md
+barrier-free-ui.md
+drawing-without-dom.md

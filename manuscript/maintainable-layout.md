@@ -19,7 +19,7 @@ I guess we will open up an `index.html` and start typing:
 <!-- ... -->
 ```
 
-As usual - **kidding**! HTML is not a programming language!
+But of course HTML is not a programming language! Let's approach this as a pure software engineering task, unencumbered by legacy habits.
 
 ## Layout Contract
 
@@ -28,3 +28,5 @@ Let's consider sidebar, top bar and main content to be a separate visual compone
 We could implement that positioning logic in the components, but that would force them to be "aware" of not just the containing window dimensions, but also each other - to respect each others' size while seamlessly rendering adjoining content.
 
 Alternatively, we can reduce the contract footprint of those components by introducing a page layout component.
+
+*to be continued*
