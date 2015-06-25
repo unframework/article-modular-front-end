@@ -1,22 +1,20 @@
 # Starting Point
 
-HTML and CSS is a brittle and convoluted combination of technologies, and the current production front-end frameworks built on top of them have a very steep learning curve. At the same time, best practices for code maintainability are usually left to be an undocumented "black art", even for popular tools. Whatever advice is out there is hotly contested and encumbered with stack-specific assumptions and preferences.
+HTML and CSS make for a brittle and convoluted combination of technologies, and most front-end frameworks add a steep complexity of their own. At the same time, best practices for in-browser code maintainability are still a surprisingly under-documented "black art"; whatever advice does exist out there is either outdated or encumbered with framework-specific assumptions and preferences. How do we learn not just to program for the Web, but also do it right?
 
-Regardless of experience level in the industry - entry-level to seasoned - we always learn technologies and frameworks with a goal in mind. We need to know how the tools we use fit into the general philosophy of good, productive programming. What is good programming? It is more than just the DRY principle and separation of concerns.
+Regardless of experience level in the industry - entry-level to seasoned - we strive to know how the tools we use fit into the general philosophy of good, productive programming. Software success means improving speed of development and ease of maintainability. It is not even possible to grow a codebase past a certain level of complexity without applying careful thought to its structure. And, of course, project source code needs to stay transparent and easy to learn, so that new team members can get onboarded more easily.
 
-Software process success means improving speed of development and ease of maintainability. Modern applications are in a constant state of flux: our understanding of the user and app functionality constantly gets refined and pivoted, and the specifications from one week ago might be flipped upside down one week from now. Most new code we write is actually extending or replacing existing code. Nimble architectures help sustainably keep responding to that change while preserving a high quality bar.
-
-Additionally, as time goes on some team members leave and new ones join: precious project knowledge is lost to attrition, and new contributors have to be efficiently on-boarded to become productive. A good codebase, then, is transparent and delightful to learn and makes it easier to see past developers' intent.
-
-As we explore the front-end software stack, we want to know how to stay true to those goals when coding in the browser. There is already a huge amount of software engineering wisdom that has been accumulated and documented over the last few decades. This book will survey and re-frame current in-browser production code tools and techniques through that timeless lens - with a focus on building solid, simple and resilient application codebases.
+As we explore the front-end software stack, we want to know how to stay true to those goals when coding in the browser. There is already a huge amount of software engineering wisdom that has been accumulated and documented over the last few decades. This book will survey and re-frame current in-browser technologies and tools through that timeless lens - with a focus on building solid, simple and resilient application codebases.
 
 ## From Scratch
 
-To make a connection from front-end tech to basic foundations of maintainable programming, we need to start from scratch. The best way to learn something is to build it.
+To make a connection from front-end tech to basic foundations of maintainable programming, we need to start from scratch. Instead of getting lost in the patchwork of well-intentioned but overly specific advice, we will learn by building.
 
-We will start by revisiting the core problem statements of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. That will give us a properly anchored, informed perspective on choice and usage of existing production frameworks. The goal, after all, is not to reinvent the wheel, but just get a more comprehensive feel and instinct for using well-known and well-supported tools.
+We will start by revisiting the typical problem scenarios of front-end programming and solve them as simply as we can. We will then apply well-known fundamental patterns of software engineering to factor the solution into a more maintainable state. That will give us a properly anchored, informed perspective on choice and usage of existing production frameworks. The goal, after all, is not to reinvent the wheel, but just get a more comprehensive feel and instinct for using well-known and well-supported tools.
 
-First, let's survey our runtime environment as well as our software engineering toolbox. *What* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
+First, let's survey our runtime environment as well as our software engineering toolbox.
+
+So, *what* exactly are we programming when we write front-end code? Where does our program run, and what are its inputs and outputs?
 
 ## Runtime Environment
 
@@ -35,7 +33,7 @@ Those useful APIs include:
 - WebAudio
 - kitchen sink
 
-We are putting the JavaScript runtime at the center of the picture because that is, after all, where actual code runs. Focusing on the pure code first helps us relate programming wisdom from other environments (such as servers or embedded devices) to front-end development.
+Importantly, we do not put HTML and CSS at the center of attention. In the application-centric worldview, they are merely companion technologies used to render the interface and collect interactive input. Running code is still the main focus point.
 
 Next, let's cover the strategies that we can use to manage complexity of that code.
 

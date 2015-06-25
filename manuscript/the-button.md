@@ -166,7 +166,7 @@ function StandardButton(labelText, isFullWidth) {
 
 The standard button component now clearly declares the kinds of display styles it supports (normal and full-width), and no other code needs to break its encapsulation boundary. The sidebar will simply ask the button to render full-width, as can any other component.
 
-> The `-` prefix in `-full-width` is inspired by the BEM naming convention. BEM is a set of recommendations that we are not following verbatim (our starting point is a bit more application-centric) but the dash-modifier syntax combined with multi-class selector is excellent for avoiding accidentally triggering another component's CSS declarations.
+> The `-` prefix in `-full-width` is inspired by the so-called BEM naming convention. BEM describes its own naming scheme and methodology which we are not using, but we stick to its pattern of applying the `-` symbol to denote modifiers.
 
 ## CSS Inheritance and Tag Selectors
 
@@ -227,6 +227,6 @@ We can add a CSS class to it, of course. But it should not be something like `ic
 }
 ```
 
-> The `_` prefix in `_icon` is also inspired by BEM naming conventions. The latter suggests using a fully-qualified namespaced class name using double-underscore (`__`) as separator; in our case that would be `standard-button__icon`. However, we still want to use the direct child selector (`>`) in our CSS, and that already restricts the stylesheet scope sufficiently well. That allows us to opt for a shorter syntax of just prefixing with `_`.
+> The `_` prefix in `_icon` is also inspired by the BEM naming convention. Just like in BEM, we use `_` as prefix to denote a "child" class, scoped to a particular component.
 
 This covers most implementation needs of rendering a component under our new guidelines of visual encapsulation and sole-sourced CSS.
